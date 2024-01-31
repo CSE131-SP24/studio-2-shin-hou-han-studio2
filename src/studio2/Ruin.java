@@ -12,30 +12,33 @@ public class Ruin {
 		int startAmount = in.nextInt();
 		double winChance = in.nextDouble();
 		int winLimit = in.nextInt();
+		int totalSimulations = in.nextInt();
 		
 		System.out.println(startAmount + winChance + winLimit);
 		
 		double result=0;
-		
-		while (startAmount>0 && startAmount < winLimit) {
-			
-			result = Math.random();
-			
-			if (winChance>=result) {
-				startAmount++;
+		for (int simulations = 0; simulations < totalSimulations; simulations++) {
+			int plays = 0;
+			int amt = startAmount;
+			while (amt>0 && amt < winLimit) {
+				result = Math.random();
+					plays++;
+				if (winChance>=result) {
+					amt++;
+				}
+				else {
+					amt--;
+				}
+
+				if (amt == winLimit) {
+					System.out.println("Day " + simulations + ": " + plays + " plays. You won!!! :)))))");
+					
+				}
+				else if (amt == 0) {
+					System.out.println("Day " + simulations + ": " + plays + " plays. You lose. :(((");
+				}
+				
 			}
-			else {
-				startAmount--;
-			}
-			
-			
-		}
-		if (startAmount == winLimit) {
-			System.out.println("You win!!!!! :))");
-			
-		}
-		else if (startAmount == 0) {
-			System.out.println("You Lose!");
 		}
 	}
 
